@@ -1,7 +1,11 @@
 const Project = require('../models/project');
 const { validationResult } = require('express-validator');
+const passport = require('passport');
 
 exports.createProject = (req, res, next) => {
+    const isAuth = req.isAuthenticated();
+    const session = req.session;
+    console.log(session)
     const src = req.body.src;
     const url = req.body.url;
     const name = req.body.name;

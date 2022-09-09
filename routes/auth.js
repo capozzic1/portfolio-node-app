@@ -3,8 +3,10 @@ const User = require('../models/user');
 const router = express.Router();
 const authController = require('../controllers/auth');
 const { body } = require('express-validator');
+// const requireLocalAuth = require('../middleware/requireLocalAuth');
+const passport = require('passport')
 
-router.post('/signup', [
+router.post('/register', [
     body('email').isEmail().withMessage('Please enter a valid e-mail')
     .custom((value, { req }) => {
         console.log(value)
@@ -19,6 +21,8 @@ router.post('/signup', [
 ]
 , authController.signUp)
 
-router.post('/login', authController.login)
+router.post('/login', passport.authenticate('local'), authController.login)
+
+
 
 module.exports = router;
