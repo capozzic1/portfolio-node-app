@@ -3,7 +3,7 @@ const router = express.Router();
 const ProjectController = require('../controllers/project');
 const { body } = require('express-validator');
 const isAuth = require('../middleware/isAuth');
-const passport = require('passport');
+
 
 router.post('/create', isAuth, ProjectController.createProject);
 

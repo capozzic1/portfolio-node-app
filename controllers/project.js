@@ -1,6 +1,6 @@
 const Project = require('../models/project');
 const { validationResult } = require('express-validator');
-const passport = require('passport');
+
 
 exports.createProject = (req, res, next) => {
     const isAuth = req.isAuthenticated();
@@ -54,7 +54,7 @@ exports.updateProject = (req, res, next) => {
     if (!errors.isEmpty()) {
         const error = new Error("Validation failed, entered data is incorrect")
         error.status = 422;
-        throw error;
+        next(error)
     }
 
     const projectId = req.params.projectId;

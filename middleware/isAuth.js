@@ -1,34 +1,11 @@
 
 
 module.exports = (req, res, next) => {
-   const test = req.isAuthenticated();
-   const session = req.session;
-   console.log(test)
+   const isLoggedIn = req.isAuthenticated();
+   
+   if (!isLoggedIn) {
+    return res.status(401).json({ message: "Please log in."})
+   }
    next()
-    // const authHeader = req.get('Authorization');
 
-    // if (!authHeader) {
-    //     const error = new Error('Not authenticated')
-    //     error.statusCode = 401;
-    //     throw error;
-    // }
-
-    // const token = authHeader.split(' ')[1];
-    // let decodedToken;
-
-    // try {
-    //     decodedToken = jwt.verify(token, process.env.JWTSECRET)
-    // } catch(err) {
-    //     err.statusCode = 500;
-    //     throw err;
-    // }
-
-    // if (!decodedToken) {
-    //     const error = new Error('Not authenticated, no token found');
-    //     error.statusCode = 401;
-    //     throw error;
-    // }
-
-    // req.userId = decodedToken.userId
-    // next();
 }
